@@ -1,0 +1,62 @@
+.stock__container {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    transition: var(--transition1);
+}
+
+.title {
+    color: var(--primary_colour);
+    text-align: left;
+}
+
+.symbol {
+    color: var(--primary_colour);
+}
+
+.stock__info {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.stock__info-left {
+    text-align: left;
+}
+
+.stock__info-right {
+    text-align: right;
+}
+.stock__info-right p {
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+
+.stock__container:hover {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.latest-price {
+    padding: 2px 5px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* For price decrease */
+.stock__info-right .latest-price.red-bg {
+    background-color: red;
+  }
+
+  /* For no price change */
+  .stock__info-right .latest-price.gray-bg {
+    background-color: gray;
+  }
+
+  /* For price increase */
+  .stock__info-right .latest-price.green-bg {
+    background-color: green;
+  }
