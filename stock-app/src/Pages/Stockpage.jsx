@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styling/stockpage.css";
 import Stock from "../Components/Stock";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const Stockpage = () => {
@@ -17,6 +18,7 @@ const Stockpage = () => {
   const [searchResults, setSearchResults] = useState([]); // Store search results
   const [popularStocksData, setPopularStocksData] = useState([]); // Store data for popular stocks
   const [selectedStock, setSelectedStock] = useState(null); // Store the selected stock symbol
+  const [stockNews, setStockNews] = useState([]);
 
   const [priceTrendScore, setPriceTrendScore] = useState(0);
   const [peScore, setPeScore] = useState(0);
@@ -24,9 +26,8 @@ const Stockpage = () => {
   const [volumeScore, setVolumeScore] = useState(0);
   const [dayrangeScore, setDayrangeScore] = useState(0);
   const [yearrangeScore, setYearrangeScore] = useState(0);
-  const [overallScore, setOverallScore] = useState(''); // Initialize with an initial value, such as an empty string
+  const [overallScore, setOverallScore] = useState(""); // Initialize with an initial value, such as an empty string
   const [ovrscore, setOvrScore] = useState(0); // Initialize with an initial value, such as an empty string
-
 
   const calculatePriceTrendScore = (currentPrice, priceAvg50, priceAvg200) => {
     const deviationFrom50MA = (currentPrice - priceAvg50) / priceAvg50;
@@ -41,34 +42,48 @@ const Stockpage = () => {
 
     return totalScore;
   };
+  const fetchStockNews = async (symbol) => {
+    const apiKey = "c8900940600098ea62d8a0f27d823099"; // Replace with your API key
+    try {
+      console.log("Fetching news data for symbol:", symbol);
+      const response = await axios.get(
+        `https://financialmodelingprep.com/api/v3/stock_news?tickers=${symbol}&page=0&apikey=${apiKey}`
+      );
+      console.log("News data response:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Fetch error:", error);
+      return [];
+    }
+  };
 
   const calculatePEScore = (peRatio) => {
     // Define your logic to assign scores based on PE ratio
     // You can adjust the threshold and score values as needed
     if (peRatio < 10) {
-        return 100;
-      } else if (peRatio >= 10 && peRatio < 20) {
-        return 75;
-      } else if (peRatio >= 20 && peRatio < 30) {
-        return 50;
-      } else if (peRatio >= 30 && peRatio < 40) {
-        return 25;
-      } else {
-        return 0;
-      }
+      return 100;
+    } else if (peRatio >= 10 && peRatio < 20) {
+      return 75;
+    } else if (peRatio >= 20 && peRatio < 30) {
+      return 50;
+    } else if (peRatio >= 30 && peRatio < 40) {
+      return 25;
+    } else {
+      return 0;
+    }
   };
   const calculateEPSScore = (eps) => {
     if (eps === null || eps <= 0) {
-        return 0;
-      } else if (eps < 2) {
-        return 25;
-      } else if (eps >= 2 && eps < 5) {
-        return 50;
-      } else if (eps >= 5 && eps < 10) {
-        return 75;
-      } else {
-        return 100;
-      }
+      return 0;
+    } else if (eps < 2) {
+      return 25;
+    } else if (eps >= 2 && eps < 5) {
+      return 50;
+    } else if (eps >= 5 && eps < 10) {
+      return 75;
+    } else {
+      return 100;
+    }
   };
   // Calculate the Volume Score
   const calculateVolumeScore = (currentVolume, averageVolume) => {
@@ -78,15 +93,15 @@ const Stockpage = () => {
 
     const volumeRatio = currentVolume / averageVolume;
 
-  if (volumeRatio >= 2) {
-    return 100;
-  } else if (volumeRatio >= 1) {
-    return 75;
-  } else if (volumeRatio >= 0.5) {
-    return 50;
-  } else {
-    return 25;
-  }
+    if (volumeRatio >= 2) {
+      return 100;
+    } else if (volumeRatio >= 1) {
+      return 75;
+    } else if (volumeRatio >= 0.5) {
+      return 50;
+    } else {
+      return 25;
+    }
   };
 
   // Calculate the Day Range Score
@@ -98,16 +113,16 @@ const Stockpage = () => {
     const priceRatio = (currentPrice - dayLow) / (dayHigh - dayLow);
 
     if (priceRatio >= 0.8) {
-        return 100;
-      } else if (priceRatio >= 0.6) {
-        return 75;
-      } else if (priceRatio >= 0.4) {
-        return 50;
-      } else if (priceRatio >= 0.2) {
-        return 25;
-      } else {
-        return 0;
-      }
+      return 100;
+    } else if (priceRatio >= 0.6) {
+      return 75;
+    } else if (priceRatio >= 0.4) {
+      return 50;
+    } else if (priceRatio >= 0.2) {
+      return 25;
+    } else {
+      return 0;
+    }
   };
 
   // Calculate the Year Range Score
@@ -119,16 +134,16 @@ const Stockpage = () => {
     const priceRatio = (currentPrice - yearLow) / (yearHigh - yearLow);
 
     if (priceRatio >= 0.8) {
-        return 100;
-      } else if (priceRatio >= 0.6) {
-        return 75;
-      } else if (priceRatio >= 0.4) {
-        return 50;
-      } else if (priceRatio >= 0.2) {
-        return 25;
-      } else {
-        return 0;
-      }
+      return 100;
+    } else if (priceRatio >= 0.6) {
+      return 75;
+    } else if (priceRatio >= 0.4) {
+      return 50;
+    } else if (priceRatio >= 0.2) {
+      return 25;
+    } else {
+      return 0;
+    }
   };
 
   const fetchPopularStocksData = async (symbols) => {
@@ -183,6 +198,7 @@ const Stockpage = () => {
     console.log("Clicked stock:", symbol); // Log clicked stock symbol
     setSelectedStock(symbol); // Set the selected stock
     setSearchedStock(symbol); // Set the selected stock
+    setSearchResults([]); // Clear search results after selection
     // Do nothing when popular stock is clicked
   };
   const handleSearchResultClick = (symbol) => {
@@ -206,7 +222,7 @@ const Stockpage = () => {
       setVolumeScore(0);
       setDayrangeScore(0);
       setYearrangeScore(0);
-      setOverallScore('');
+      setOverallScore("");
       setOvrScore(0);
     } else if (searchedStock !== selectedStock) {
       // If the search query has changed from the previous search
@@ -225,7 +241,7 @@ const Stockpage = () => {
         setVolumeScore(0);
         setDayrangeScore(0);
         setYearrangeScore(0);
-        setOverallScore('');
+        setOverallScore("");
         setOvrScore(0);
       } catch (error) {
         console.error("Search error:", error);
@@ -247,75 +263,83 @@ const Stockpage = () => {
     }
   };
 
-
   useEffect(() => {
     if (selectedStock) {
-
-        setSearchedStockData(null);
-        setPriceTrendScore(0);
-        setPeScore(0);
-        setEpsScore(0);
-        setVolumeScore(0);
-        setDayrangeScore(0);
-        setYearrangeScore(0);
-        setOverallScore('');
-        setOvrScore(0);
+      setSearchedStockData(null);
+      setPriceTrendScore(0);
+      setPeScore(0);
+      setEpsScore(0);
+      setVolumeScore(0);
+      setDayrangeScore(0);
+      setYearrangeScore(0);
+      setOverallScore("");
+      setOvrScore(0);
 
       fetchStockData(selectedStock).then((data) => {
-        console.log("FOUND INFO:", data);
-        setSearchedStockData(data);
+        if (data && data.length > 0) {
+          console.log("FOUND INFO:", data);
+          setSearchedStockData(data);
 
-        const currentPrice = data[0]?.price;
-        const priceAvg50 = data[0]?.priceAvg50;
-        const priceAvg200 = data[0]?.priceAvg200;
+          const currentPrice = data[0]?.price;
+          const priceAvg50 = data[0]?.priceAvg50;
+          const priceAvg200 = data[0]?.priceAvg200;
 
-        const priceTrendScore = calculatePriceTrendScore(
-          currentPrice,
-          priceAvg50,
-          priceAvg200
-        );
+          const priceTrendScore = calculatePriceTrendScore(
+            currentPrice,
+            priceAvg50,
+            priceAvg200
+          );
 
-        // Calculate the PE and EPS score
-        const peScore = calculatePEScore(data[0]?.pe);
-        const epsScore = calculateEPSScore(data[0]?.eps); // Calculate EPS score
+          // Calculate the PE and EPS score
+          const peScore = calculatePEScore(data[0]?.pe);
+          const epsScore = calculateEPSScore(data[0]?.eps); // Calculate EPS score
 
-        const volumeScore = calculateVolumeScore(
-          data[0]?.volume,
-          data[0]?.avgVolume
-        );
-        const dayrangeScore = calculateDayRangeScore(
-          data[0]?.price,
-          data[0]?.dayLow,
-          data[0]?.dayHigh
-        );
-        const yearrangeScore = calculateYearRangeScore(
-          data[0]?.price,
-          data[0]?.yearLow,
-          data[0]?.yearHigh
-        );
+          const volumeScore = calculateVolumeScore(
+            data[0]?.volume,
+            data[0]?.avgVolume
+          );
+          const dayrangeScore = calculateDayRangeScore(
+            data[0]?.price,
+            data[0]?.dayLow,
+            data[0]?.dayHigh
+          );
+          const yearrangeScore = calculateYearRangeScore(
+            data[0]?.price,
+            data[0]?.yearLow,
+            data[0]?.yearHigh
+          );
 
-        const overallScore = priceTrendScore +peScore + epsScore + volumeScore + dayrangeScore + yearrangeScore;
+          const overallScore =
+            priceTrendScore +
+            peScore +
+            epsScore +
+            volumeScore +
+            dayrangeScore +
+            yearrangeScore;
 
-        setPriceTrendScore(priceTrendScore);
-        setPeScore(peScore);
-        setEpsScore(epsScore);
-        setVolumeScore(volumeScore);
-        setDayrangeScore(dayrangeScore);
-        setYearrangeScore(yearrangeScore);
-        setOvrScore(overallScore);
+          setPriceTrendScore(priceTrendScore);
+          setPeScore(peScore);
+          setEpsScore(epsScore);
+          setVolumeScore(volumeScore);
+          setDayrangeScore(dayrangeScore);
+          setYearrangeScore(yearrangeScore);
+          setOvrScore(overallScore);
 
-        if (overallScore >= 500) {
+          if (overallScore >= 500) {
             setOverallScore("Excellent");
           } else if (overallScore >= 400) {
-            setOverallScore ("Very Good");
+            setOverallScore("Very Good");
           } else if (overallScore >= 300) {
-            setOverallScore ("Good");
+            setOverallScore("Good");
           } else if (overallScore >= 200) {
-            setOverallScore ("Moderate");
+            setOverallScore("Moderate");
           } else {
-            setOverallScore ("Poor");
+            setOverallScore("Poor");
           }
-
+        } else {
+          console.error("Error fetching stock data:", data);
+          // Handle the error or provide appropriate feedback to the user
+        }
 
         // Now you can use the 'overallScore' or other calculated values as needed
       });
@@ -358,7 +382,7 @@ const Stockpage = () => {
                 onChange={(e) => setSearchedStock(e.target.value)}
               />
               <button type="submit" className="go">
-                Go
+                Search
               </button>
             </div>
             <div className="search_results">
@@ -373,55 +397,93 @@ const Stockpage = () => {
                 </div>
               ))}
             </div>
+            <div className="stock_selected">
+              Selected Stock: {selectedStock}
+            </div>
           </form>
           <div className="category">
             <div className="category1">
               <h3>Stock Price</h3>
-              <h5>{searchedStockData &&  searchedStock && searchedStockData[0]?.price}</h5>
+              <h5>
+                {searchedStockData &&
+                  searchedStock &&
+                  searchedStockData[0]?.price}
+              </h5>
             </div>
             <div className="category1">
               <h3>Volume</h3>
               <h5>
-                Volume - {searchedStockData && searchedStock &&searchedStockData[0]?.volume}
+                Vol:{" "}
+                {searchedStockData &&
+                  searchedStock &&
+                  searchedStockData[0]?.volume}
               </h5>
               <h5>
-                Avg. Volume -{" "}
-                {searchedStockData && searchedStock &&searchedStockData[0]?.avgVolume}
+                Avg. Vol:{" "}
+                {searchedStockData &&
+                  searchedStock &&
+                  searchedStockData[0]?.avgVolume}
               </h5>
             </div>
 
             <div className="category1">
               <h3>Market Cap</h3>
-              <h5>{searchedStockData && searchedStock &&searchedStockData[0]?.marketCap}</h5>
+              <h5>
+                {searchedStockData &&
+                  searchedStock &&
+                  searchedStockData[0]?.marketCap}
+              </h5>
             </div>
             <div className="category1">
               <h3>P/E</h3>
-              <h5>{searchedStockData && searchedStock &&searchedStockData[0]?.pe}</h5>
+              <h5>
+                {searchedStockData && searchedStock && searchedStockData[0]?.pe}
+              </h5>
             </div>
             <div className="category1">
               <h3>EPS</h3>
-              <h5>{searchedStockData && searchedStock &&searchedStockData[0]?.eps}</h5>
+              <h5>
+                {searchedStockData &&
+                  searchedStock &&
+                  searchedStockData[0]?.eps}
+              </h5>
             </div>
             <div className="category1">
               <h3>Day High/Low</h3>
               <h5>
-                High - {searchedStockData && searchedStock &&searchedStockData[0]?.yearHigh}
+                High:{" "}
+                {searchedStockData &&
+                  searchedStock &&
+                  searchedStockData[0]?.yearHigh}
               </h5>
               <h5>
-                Low - {searchedStockData && searchedStock &&searchedStockData[0]?.yearLow}
+                Low:{" "}
+                {searchedStockData &&
+                  searchedStock &&
+                  searchedStockData[0]?.yearLow}
               </h5>
             </div>
             <div className="category1">
               <h3>Year High/Low</h3>
               <h5>
-                High - {searchedStockData && searchedStock &&searchedStockData[0]?.dayHigh}
+                High:{" "}
+                {searchedStockData &&
+                  searchedStock &&
+                  searchedStockData[0]?.dayHigh}
               </h5>
-              <h5>Low - {searchedStockData && searchedStock &&searchedStockData[0]?.dayLow}</h5>
+              <h5>
+                Low:{" "}
+                {searchedStockData &&
+                  searchedStock &&
+                  searchedStockData[0]?.dayLow}
+              </h5>
             </div>
             <div className="category1">
               <h3>Previous Closing</h3>
               <h5>
-                {searchedStockData && searchedStock && searchedStockData[0]?.previousClose}
+                {searchedStockData &&
+                  searchedStock &&
+                  searchedStockData[0]?.previousClose}
               </h5>
             </div>
           </div>
@@ -446,7 +508,7 @@ const Stockpage = () => {
               </div>
               <div className="single_score">
                 <h3>Day Range</h3>
-                {searchedStock &&  <h5>{dayrangeScore}</h5>}
+                {searchedStock && <h5>{dayrangeScore}</h5>}
               </div>
               <div className="single_score">
                 <h3>Year Range</h3>
@@ -454,10 +516,18 @@ const Stockpage = () => {
               </div>
               <div className="single_score">
                 <h3>Overall</h3>
-                { searchedStock && <h5>{overallScore}</h5>}
+                {searchedStock && <h5>{overallScore}</h5>}
                 {searchedStock && <h5>{ovrscore.toFixed(2)}</h5>}
               </div>
             </div>
+          </div>
+          <div className="stock__news">
+            <Link
+              to={`/news/${selectedStock}`}
+              className="news__button"
+            >
+              Stock News
+            </Link>
           </div>
         </div>
       </div>
