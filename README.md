@@ -1,6 +1,6 @@
 <h1 align="center" id="title">StockZ</h1>
 
-<p align="center"><img src="[https://image.similarpng.com/very-thumbnail/2021/09/Creative-money-logo-design-on-transparent-background-PNG.png](https://static.vecteezy.com/system/resources/previews/009/384/888/original/pack-of-dollars-money-clipart-design-illustration-free-png.png)" alt="project-image"></p>
+<p align="center"><img src="https://static.vecteezy.com/system/resources/previews/009/384/888/original/pack-of-dollars-money-clipart-design-illustration-free-png.png" alt="project-image"></p>
 
 <p id="description">The Stock Analyzer App is a sophisticated and user-friendly application designed to empower investors and traders with valuable insights for making informed decisions in the stock market. This cutting-edge app offers a wide range of features and tools to enhance the user's stock market experience from real-time stock data analysis to customizable watchlists and investment portfolio tracking.</p>
 
