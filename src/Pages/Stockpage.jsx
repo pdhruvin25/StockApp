@@ -3,6 +3,7 @@ import "../CSS/stockpage.css";
 import Stock from "../Components/Stock";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { BsXCircle } from "react-icons/bs";
 
 const Stockpage = () => {
   const popularStocks = [
@@ -27,6 +28,8 @@ const Stockpage = () => {
   const [popularStocksData, setPopularStocksData] = useState([]); // Store data for popular stocks
   const [selectedStock, setSelectedStock] = useState(null); // Store the selected stock symbol
   const [stockNews, setStockNews] = useState([]);
+  const [clearStockInfo, setClearStockInfo] = useState(false);
+
 
   const [priceTrendScore, setPriceTrendScore] = useState(0);
   const [peScore, setPeScore] = useState(0);
@@ -269,7 +272,25 @@ const Stockpage = () => {
         setSearchResults([]);
       }
     }
+
+    // Clear stock information if the user clicked the clear button
+    if (clearStockInfo) {
+      setClearStockInfo(false);
+      setSearchResults([]); // Clear the search results
+      setSearchedStockData(null); // Clear the searched stock data
+      setSelectedStock(null); // Clear the selected stock
+      setPriceTrendScore(0);
+      setPeScore(0);
+      setEpsScore(0);
+      setVolumeScore(0);
+      setDayrangeScore(0);
+      setYearrangeScore(0);
+      setOverallScore("");
+      setOvrScore(0);
+    }
   };
+
+
 
   useEffect(() => {
     if (selectedStock) {
@@ -357,7 +378,7 @@ const Stockpage = () => {
   return (
     <div className="main__container">
       <div className="container">
-      {searchedStockData === null  && (
+      {searchedStock === ""  && (
   <div className="list__stocks">
     {popularStocks.map((stock) => {
       const stockData = popularStocksData.find(
@@ -391,6 +412,13 @@ const Stockpage = () => {
               <button type="submit" className="go">
                 Search
               </button>
+              <button
+  type="button"
+  className="clear_button"
+  onClick={() => setClearStockInfo(true)}
+>
+  <BsXCircle className="clear_icon" />
+</button>
             </div>
             <div className="search_results">
               {searchResults.map((result) => (
