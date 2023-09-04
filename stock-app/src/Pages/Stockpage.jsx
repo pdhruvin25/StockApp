@@ -11,6 +11,14 @@ const Stockpage = () => {
     { name: "Microsoft Corporation", symbol: "MSFT" },
     { name: "Saudi Arabia Oil", symbol: "SE" },
     { name: "Google", symbol: "GOOGL" },
+     { name: "Netflix", symbol: "NFLX" },
+      { name: "Tesla", symbol: "TSLA" },
+      { name: "Mastercard", symbol: "MA" },
+      { name: "VISA", symbol: "VS" },
+      { name: "Coca Cola", symbol: "KO" },
+      { name: "Meta", symbol: "META" },
+      { name: "Berkshire", symbol: "BHLB" },
+
   ];
   const [searchedStock, setSearchedStock] = useState("");
   const [searchedStockData, setSearchedStockData] = useState(null); // Store data for the searched stock
@@ -349,26 +357,25 @@ const Stockpage = () => {
   return (
     <div className="main__container">
       <div className="container">
-        <div className="popular__stocks">
-          <h3>Popular Stocks</h3>
-          <div className="list__stocks">
-            {popularStocks.map((stock) => {
-              const stockData = popularStocksData.find(
-                (data) => data.symbol === stock.symbol
-              );
+      {searchedStockData === null  && (
+  <div className="list__stocks">
+    {popularStocks.map((stock) => {
+      const stockData = popularStocksData.find(
+        (data) => data.symbol === stock.symbol
+      );
 
-              return (
-                <Stock
-                  key={stock.symbol}
-                  name={stock.name}
-                  symbol={stock.symbol}
-                  data={stockData}
-                  onClick={() => handleStockClick(stock.symbol)}
-                />
-              );
-            })}
-          </div>
-        </div>
+      return (
+        <Stock
+          key={stock.symbol}
+          name={stock.name}
+          symbol={stock.symbol}
+          data={stockData}
+          onClick={() => handleStockClick(stock.symbol)}
+        />
+      );
+    })}
+  </div>
+)}
         <div className="search__bar">
           <form id="form" className="search_bar" onSubmit={handleSearchSubmit}>
             <div className="text_box">
@@ -521,14 +528,18 @@ const Stockpage = () => {
               </div>
             </div>
           </div>
-          <div className="stock__news">
-            <Link
-              to={`/news/${selectedStock}`}
-              className="news__button"
-            >
-              Stock News
-            </Link>
-          </div>
+          {selectedStock && (
+            <div className="stock__news">
+              <Link
+                to={`/news/${selectedStock}`} // Update the URL path accordingly
+                className="news__button"
+                target="blank"
+              >
+                {`Click For ${selectedStock} News`}{" "}
+                {/* Display the selected stock's name */}
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>

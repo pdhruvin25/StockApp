@@ -60,3 +60,16 @@
   .stock__info-right .latest-price.green-bg {
     background-color: green;
   }
+
+  @media screen and (max-width: 1024px){
+    .stock__container{
+      /* height:4rem; */
+    }
+  }
+
+  /*Small Screen*/
+@media screen and (max-width: 600px){
+    .stock__container{
+        /* width:fit-content; */
+      }
+  }
