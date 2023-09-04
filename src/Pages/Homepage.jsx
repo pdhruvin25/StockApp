@@ -17,7 +17,7 @@ const Homepage = () => {
           <h5 className="slogan">
             Shaping Infinity <br /> One Investment At A Time
           </h5>
-          <Link to="/StockApp/stocks" className="signup">
+          <Link to="/stocks" className="signup">
           Begin Your Journey
         </Link>
         </div>

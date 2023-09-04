@@ -94,23 +94,25 @@ gap: 1rem;
     margin-left: 2rem;
     backdrop-filter: blur(15px);
     text-align: left;
-    overflow-x: scroll;
     background: rgba(0, 0, 0, 0.2);
     padding: 0rem 1rem 1rem 1rem;
-    display: grid;
-
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
 
 }
 
 .single_result:hover {
-    background: var(--green);
-    transition: var(--transition1);
+    background: var(--lightest_green);
 }
 
 .single_result {
     width: fit-content;
-    padding: 0.3rem;
+    padding: 0.2rem 0.5rem 0.2rem 0.5rem;
     border-radius: 1rem;
+    transition: var(--transition1);
+    background: rgba(0, 0, 0, 0.2);
+
 }
 
 .go {
