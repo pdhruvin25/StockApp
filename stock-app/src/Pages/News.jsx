@@ -4,14 +4,14 @@ import axios from "axios";
 import "../styling/news.css";
 
 const News = () => {
-  const { symbol } = useParams();
+  const { symbol} = useParams();
   const [newsData, setNewsData] = useState([]);
 
   const fetchStockNews = async (symbol) => {
     const apiToken = "Rlys48Pd9kkchdgI2sc73jfj4BuGPY9JM34b0K7p"; // Replace with your API token
     try {
       const response = await axios.get(
-        `https://api.marketaux.com/v1/news/all?symbols=${symbol}&filter_entities=true&entity_types=equity&language=en&api_token=${apiToken}&group_similar=true&limit=5`
+        `https://api.marketaux.com/v1/news/all?symbols=${symbol}&filter_entities=true&language=en&api_token=${apiToken}&group_similar=true&limit=5`
         );
       return response.data.data;
     } catch (error) {
