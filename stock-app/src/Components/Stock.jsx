@@ -1,5 +1,5 @@
 import React from "react";
-import "../styling/stock.css";
+import "../CSS/stock.css";
 
 const Stock = ({ name, symbol, onClick, data }) => {
   console.log("Stock component rendering for:", symbol);

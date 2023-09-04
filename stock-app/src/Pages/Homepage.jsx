@@ -1,5 +1,5 @@
 import React from "react";
-import "../styling/homepage.css";
+import "../CSS/homepage.css";
 import { BsInfinity } from "react-icons/bs";
 import { Link } from "react-router-dom";
 

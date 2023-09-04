@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../styling/stockpage.css";
+import "../CSS/stockpage.css";
 import Stock from "../Components/Stock";
 import { Link } from "react-router-dom";
 import axios from "axios";

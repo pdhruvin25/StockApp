@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import "../styling/news.css";
+import "../CSS/news.css";
 
 const News = () => {
-  const { symbol} = useParams();
+  const { symbol } = useParams();
   const [newsData, setNewsData] = useState([]);
 
   const fetchStockNews = async (symbol) => {
