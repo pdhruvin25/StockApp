@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/StockApp" element={<><Homepage/></>}/>
         <Route path="/stocks" element={<><Stockpage/></>}/>
-        <Route path="/stocks/news/:symbol" element = {<><News/></>} />
+        <Route path="/StockApp/stocks/news/:symbol" element = {<><News/></>} />
 
       </Routes>
       </BrowserRouter>

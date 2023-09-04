@@ -12,14 +12,13 @@ const Stockpage = () => {
     { name: "Microsoft Corporation", symbol: "MSFT" },
     { name: "Saudi Arabia Oil", symbol: "SE" },
     { name: "Google", symbol: "GOOGL" },
-     { name: "Netflix", symbol: "NFLX" },
-      { name: "Tesla", symbol: "TSLA" },
-      { name: "Mastercard", symbol: "MA" },
-      { name: "VISA", symbol: "VS" },
-      { name: "Coca Cola", symbol: "KO" },
-      { name: "Meta", symbol: "META" },
-      { name: "Berkshire", symbol: "BHLB" },
-
+    { name: "Netflix", symbol: "NFLX" },
+    { name: "Tesla", symbol: "TSLA" },
+    { name: "Mastercard", symbol: "MA" },
+    { name: "VISA", symbol: "VS" },
+    { name: "Coca Cola", symbol: "KO" },
+    { name: "Meta", symbol: "META" },
+    { name: "Berkshire", symbol: "BHLB" },
   ];
   const [searchedStock, setSearchedStock] = useState("");
   const [searchedStockData, setSearchedStockData] = useState(null); // Store data for the searched stock
@@ -29,7 +28,6 @@ const Stockpage = () => {
   const [selectedStock, setSelectedStock] = useState(null); // Store the selected stock symbol
   const [stockNews, setStockNews] = useState([]);
   const [clearStockInfo, setClearStockInfo] = useState(false);
-
 
   const [priceTrendScore, setPriceTrendScore] = useState(0);
   const [peScore, setPeScore] = useState(0);
@@ -290,8 +288,6 @@ const Stockpage = () => {
     }
   };
 
-
-
   useEffect(() => {
     if (selectedStock) {
       setSearchedStockData(null);
@@ -378,25 +374,25 @@ const Stockpage = () => {
   return (
     <div className="main__container">
       <div className="container">
-      {searchedStock === ""  && (
-  <div className="list__stocks">
-    {popularStocks.map((stock) => {
-      const stockData = popularStocksData.find(
-        (data) => data.symbol === stock.symbol
-      );
+        {searchedStock === "" && (
+          <div className="list__stocks">
+            {popularStocks.map((stock) => {
+              const stockData = popularStocksData.find(
+                (data) => data.symbol === stock.symbol
+              );
 
-      return (
-        <Stock
-          key={stock.symbol}
-          name={stock.name}
-          symbol={stock.symbol}
-          data={stockData}
-          onClick={() => handleStockClick(stock.symbol)}
-        />
-      );
-    })}
-  </div>
-)}
+              return (
+                <Stock
+                  key={stock.symbol}
+                  name={stock.name}
+                  symbol={stock.symbol}
+                  data={stockData}
+                  onClick={() => handleStockClick(stock.symbol)}
+                />
+              );
+            })}
+          </div>
+        )}
         <div className="search__bar">
           <form id="form" className="search_bar" onSubmit={handleSearchSubmit}>
             <div className="text_box">
@@ -413,12 +409,12 @@ const Stockpage = () => {
                 Search
               </button>
               <button
-  type="button"
-  className="clear_button"
-  onClick={() => setClearStockInfo(true)}
->
-  <BsXCircle className="clear_icon" />
-</button>
+                type="button"
+                className="clear_button"
+                onClick={() => setClearStockInfo(true)}
+              >
+                <BsXCircle className="clear_icon" />
+              </button>
             </div>
             <div className="search_results">
               {searchResults.map((result) => (
@@ -559,11 +555,10 @@ const Stockpage = () => {
           {selectedStock && (
             <div className="stock__news">
               <Link
-                to={`/stocks/news/${selectedStock}`} // Update the URL path accordingly
+                to={`/StockApp/stocks/news/${selectedStock}`} // Update the URL path accordingly
                 className="news__button"
               >
-                {`Click For ${selectedStock} News`}{" "}
-                {/* Display the selected stock's name */}
+                {`Click For ${selectedStock} News`}
               </Link>
             </div>
           )}
