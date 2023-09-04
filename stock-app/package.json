@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
 "homepage": "https://pdhruvin25.github.io/StockApp",
+=======
+"homepage": "http://pdhruvin25.github.io/StockApp",
+>>>>>>> 24bdbd18a48293e6d68215249d0ee5c71bd0a819
   "name": "stock-app",
   "version": "0.1.0",
   "private": true,
