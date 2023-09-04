@@ -559,9 +559,8 @@ const Stockpage = () => {
           {selectedStock && (
             <div className="stock__news">
               <Link
-                to={`/news/${selectedStock}`} // Update the URL path accordingly
+                to={`/stocks/news/${selectedStock}`} // Update the URL path accordingly
                 className="news__button"
-                target="blank"
               >
                 {`Click For ${selectedStock} News`}{" "}
                 {/* Display the selected stock's name */}
