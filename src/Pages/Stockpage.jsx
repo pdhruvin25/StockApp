@@ -374,25 +374,25 @@ const Stockpage = () => {
   return (
     <div className="main__container">
       <div className="container">
-        {searchedStock === "" && (
-          <div className="list__stocks">
-            {popularStocks.map((stock) => {
-              const stockData = popularStocksData.find(
-                (data) => data.symbol === stock.symbol
-              );
+      { (
+      <div className="list__stocks">
+        {popularStocks.map((stock) => {
+          const stockData = popularStocksData.find(
+            (data) => data.symbol === stock.symbol
+          );
 
-              return (
-                <Stock
-                  key={stock.symbol}
-                  name={stock.name}
-                  symbol={stock.symbol}
-                  data={stockData}
-                  onClick={() => handleStockClick(stock.symbol)}
-                />
-              );
-            })}
-          </div>
-        )}
+          return (
+            <Stock
+              key={stock.symbol}
+              name={stock.name}
+              symbol={stock.symbol}
+              data={stockData}
+              onClick={() => handleStockClick(stock.symbol)}
+            />
+          );
+        })}
+      </div>
+    )}
         <div className="search__bar">
           <form id="form" className="search_bar" onSubmit={handleSearchSubmit}>
             <div className="text_box">
@@ -405,16 +405,11 @@ const Stockpage = () => {
                 value={searchedStock}
                 onChange={(e) => setSearchedStock(e.target.value)}
               />
+
               <button type="submit" className="go">
                 Search
               </button>
-              <button
-                type="button"
-                className="clear_button"
-                onClick={() => setClearStockInfo(true)}
-              >
-                <BsXCircle className="clear_icon" />
-              </button>
+
             </div>
             <div className="search_results">
               {searchResults.map((result) => (

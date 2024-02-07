@@ -12,7 +12,7 @@ const News = () => {
     try {
       const response = await axios.get(
         `https://api.marketaux.com/v1/news/all?symbols=${symbol}&filter_entities=true&language=en&api_token=${apiToken}&group_similar=true&limit=5`
-        );
+      );
       return response.data.data;
     } catch (error) {
       console.error("Fetch error:", error);
@@ -28,9 +28,7 @@ const News = () => {
 
   return (
     <div className="news__container">
-      <h1>
-        News for {symbol}
-      </h1>
+      <h1>News for {symbol}</h1>
       <div className="news">
         {newsData.map((newsItem, index) => (
           <div key={index} className="news__item">
