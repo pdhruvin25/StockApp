@@ -142,9 +142,7 @@ gap: 1rem;
     border-radius: 2rem;
     text-align: center;
     justify-content: center;
-
-
-
+    color: lightcyan;
 }
 
 .stock_selected {
@@ -186,7 +184,7 @@ gap: 1rem;
     background: rgba(0, 0, 0, 0.1);
     margin-left: 2rem;
     border-radius: 2rem;
-    color: rgba(0, 0, 0, 0.5);
+    color: lightcyan;
 
 }
 
@@ -445,7 +443,7 @@ margin-bottom: 0rem;
     .category1 h3 {
         font-size: 15px;
         font-weight: 400;
-        color: var(--primary_colour);
+        color: red;
     }
 
     .score_wrapper {

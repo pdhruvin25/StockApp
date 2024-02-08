@@ -224,7 +224,7 @@ const Stockpage = () => {
       // If the search bar is empty
       setSearchResults([]); // Clear the search results
       setSearchedStockData(null); // Clear the searched stock data
-      setSelectedStock(null); // Clear the selected stock
+      setSelectedStock(""); // Set selectedStock to an empty string
       setPriceTrendScore(0);
       setPeScore(0);
       setEpsScore(0);
@@ -276,7 +276,7 @@ const Stockpage = () => {
       setClearStockInfo(false);
       setSearchResults([]); // Clear the search results
       setSearchedStockData(null); // Clear the searched stock data
-      setSelectedStock(null); // Clear the selected stock
+      setSelectedStock(""); // Set selectedStock to an empty string
       setPriceTrendScore(0);
       setPeScore(0);
       setEpsScore(0);
@@ -374,7 +374,7 @@ const Stockpage = () => {
   return (
     <div className="main__container">
       <div className="container">
-      { (
+      {(searchedStock == "" || searchedStock != "" || selectedStock == "" || selectedStock != "") &&(
       <div className="list__stocks">
         {popularStocks.map((stock) => {
           const stockData = popularStocksData.find(
@@ -423,9 +423,9 @@ const Stockpage = () => {
                 </div>
               ))}
             </div>
-            <div className="stock_selected">
+            {searchedStock &&(<div className="stock_selected">
               Selected Stock: {selectedStock}
-            </div>
+            </div>)}
           </form>
           <div className="category">
             <div className="category1">
