@@ -8,12 +8,8 @@
 }
 
 .title {
-    color: var(--primary_colour);
+    color: var(--font_colour);
     text-align: left;
-}
-
-.symbol {
-    color: var(--primary_colour);
 }
 
 .stock__info {

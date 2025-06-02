@@ -2,9 +2,7 @@
     height: 100vh;
     padding-top: 2rem;
     overflow: hidden;
-    background: linear-gradient(to bottom, var(--background_colour), var(--light_green));
-    background: url("../pattern2.webp");
-
+    background: linear-gradient(to bottom, var(--light_green), var(--background_colour));
 }
 
 
@@ -57,8 +55,7 @@ gap: 1rem;
 }
 
 .text_box {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 2rem 2rem 0rem 0rem;
+    border-radius: 2rem 2rem 2rem 2rem;
     display: flex;
     flex-direction: row;
     padding: 1rem;
@@ -81,10 +78,10 @@ gap: 1rem;
     color: var(--light_gray);
     background: rgba(0, 0, 0, 0.1);
     font-weight: 100;
-
     padding: 1rem;
     width: 90%;
     text-align: left;
+    border-radius: 0.5rem;
 }
 
 .search__input::placeholder {
@@ -99,7 +96,6 @@ gap: 1rem;
     margin-left: 2rem;
     backdrop-filter: blur(15px);
     text-align: left;
-    background: rgba(0, 0, 0, 0.2);
     padding: 0rem 1rem 1rem 1rem;
     display: flex;
     flex-direction: row;
@@ -108,16 +104,16 @@ gap: 1rem;
 }
 
 .single_result:hover {
-    background: var(--lightest_green);
+    background-color: #333333;
+    color: var(--lightest_green);
+    font-style: bold;
 }
 
 .single_result {
     width: fit-content;
     padding: 0.2rem 0.5rem 0.2rem 0.5rem;
     border-radius: 1rem;
-    transition: var(--transition1);
-    background: rgba(0, 0, 0, 0.2);
-
+    background-color: var(--lightest_green);
 }
 
 .go {
@@ -129,20 +125,34 @@ gap: 1rem;
     color: var(--primary_colour);
 
 }
+.search__input::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    height: 1em;
+    width: 1em;
+    background: transparent;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='red' viewBox='0 0 24 24'><path d='M18.3 5.71a1 1 0 00-1.42 0L12 10.59 7.12 5.7a1 1 0 00-1.41 1.42l4.88 4.88-4.88 4.88a1 1 0 001.41 1.42L12 13.41l4.88 4.88a1 1 0 001.42-1.42l-4.88-4.88 4.88-4.88a1 1 0 000-1.42z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    transition: var(--transition1);
+  }
+
 
 .category1 {
     display: flex;
     flex-direction: column;
     backdrop-filter: blur(15px);
-    border: 2px solid rgba(0, 0, 0, 0.2);
     align-items: left;
     padding: 0rem;
-    color: rgba(0, 0, 0, 0.5);
     background: rgba(0, 0, 0, 0.1);
-    border-radius: 2rem;
+    border-radius: 0.5rem;
     text-align: center;
     justify-content: center;
     color: lightcyan;
+}
+
+.category1 h3{
+    color: var(--lightest_green)
 }
 
 .stock_selected {
@@ -177,15 +187,16 @@ gap: 1rem;
 }
 
 .score {
-    border: 2px solid rgba(0, 0, 0, 0.2);
     margin-top: 2rem;
     height: fit-content;
     backdrop-filter: blur(15px);
     background: rgba(0, 0, 0, 0.1);
     margin-left: 2rem;
-    border-radius: 2rem;
-    color: lightcyan;
-
+    border-radius: 0.5rem;
+    color: var(--font_colour);
+}
+.score h2{
+    color: var(--lightest_green);
 }
 
 .news {
@@ -302,7 +313,7 @@ gap: 1rem;
     }
 
     .score h2{
-        color: var(--primary_colour);
+        color: black;
     }
     .single_score h3{
         color: var(--primary_colour);
@@ -323,8 +334,6 @@ grid-auto-rows: minmax(100px, auto);
 
 
     .category1{
-        color: var(--primary_colour);
-        background: rgba(0, 0, 0, 0.2);
         backdrop-filter: blur(10px);
         border-radius: 1rem;
     }
@@ -415,7 +424,6 @@ margin-bottom: 0rem;
     }
 
     .category {
-
         justify-content: center;
         text-align: left;
         display: grid;
@@ -426,14 +434,11 @@ margin-bottom: 0rem;
         grid-row-gap: 0rem;
         grid-auto-rows: minmax(100px, auto);
         font-weight: 100;
-
     }
 
     .category1 {
         height: 5rem;
-        color: rgba(0, 0, 0, 0.6);
         padding: 0rem;
-        background: rgba(0, 0, 0, 0.2);
     }
 
     .category1 h5 {
@@ -443,7 +448,6 @@ margin-bottom: 0rem;
     .category1 h3 {
         font-size: 15px;
         font-weight: 400;
-        color: red;
     }
 
     .score_wrapper {
@@ -498,6 +502,5 @@ margin-bottom: 0rem;
 
     .search__input::placeholder {
         color: var(--light_gray);
-        /* Replace with your desired color */
     }
 }
