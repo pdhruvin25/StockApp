@@ -172,8 +172,8 @@ const Stockpage = () => {
   return (
     <div className="main__container">
       <div className="container">
-        <div className="list__stocks">
-          {popularStocks.map((stock) => {
+      <div className={`list__stocks ${selectedStock ? "hide-on-mobile" : ""}`}>
+        {popularStocks.map((stock) => {
             const data = popularStocksData.find(
               (d) => d.symbol === stock.symbol
             );

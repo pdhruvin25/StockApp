@@ -37,7 +37,26 @@ margin-top: 2rem;
     transition: transform 0.2s, box-shadow 0.2s;
   }
 
+  .news__button {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    margin-top: 2rem;
+    font-size: 1rem;
+    border-radius: 1rem;
+    color: var(--primary_colour);
+}
 
+.news__pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    text-align: center;
+}
+
+.news__button:hover {
+    background: rgba(0, 0, 0, 0.6);
+}
 
   .news__item h3 {
     margin-top: 0;
